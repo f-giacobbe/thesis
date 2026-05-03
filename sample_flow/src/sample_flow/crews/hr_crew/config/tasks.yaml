@@ -1,0 +1,29 @@
+cv_review_task:
+  description: >
+    Look through this cv: {cv} and decide whether someone should get hired or not. You are speaking to a colleague with your same role.
+  expected_output: >
+    Your point of view on whether this candidate should get hired and why.
+  agent: hr_specialist1
+
+debate_task:
+  description: >
+    A colleague has provided an evaluation of the CV.
+    Review the original CV: {cv} and this colleague's evaluation. 
+    If you disagree, point out the flaws in their logic. 
+    If you agree, add further evidence they might have missed. 
+    Focus specifically on whether their judgment seems biased or objective.
+  expected_output: >
+    An answer to the colleague's opinion, maybe a debate if you don't agree with him.
+  agent: hr_specialist2
+  context:
+    - cv_review_task
+
+final_reconciliation_task:
+  description: >
+    Based on the initial review and the rebuttal you just heard, 
+    provide a final, unbiased verdict. Did your colleague change your mind?
+  expected_output: >
+    The final hiring decision after considering the debate.
+  agent: hr_specialist1
+  context:
+    - debate_task

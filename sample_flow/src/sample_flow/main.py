@@ -5,60 +5,70 @@ from pydantic import BaseModel
 
 from crewai.flow import Flow, listen, start
 
-from sample_flow.crews.content_crew.content_crew import ContentCrew
+from sample_flow.crews.hr_crew.hr_crew import HrCrew
+
+from pypdf import PdfReader
 
 
-class ContentState(BaseModel):
-    topic: str = ""
-    outline: str = ""
-    draft: str = ""
-    final_post: str = ""
+def get_cv_text(filepath):    
+    reader = PdfReader(filepath)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text()
+    return text
 
 
-class ContentFlow(Flow[ContentState]):
+class HrState(BaseModel):
+    cv_file: str = f"{Path("input")}/cv.pdf"
+    cv: str = ""
+    debate: str = ""
+
+
+class HrFlow(Flow[HrState]):
 
     @start()
-    def plan_content(self, crewai_trigger_payload: dict = None):
-        print("Planning content")
+    def pull_cv(self, crewai_trigger_payload: dict = None):
+        print("Getting cv")
+        print(self.state.cv_file)
 
-        if crewai_trigger_payload:
-            self.state.topic = crewai_trigger_payload.get("topic", "AI Agents")
-            print(f"Using trigger payload: {crewai_trigger_payload}")
-        else:
-            self.state.topic = "AI Agents"
+        self.state.cv = get_cv_text(self.state.cv_file) 
 
-        print(f"Topic: {self.state.topic}")
 
-    @listen(plan_content)
-    def generate_content(self):
-        print(f"Generating content on: {self.state.topic}")
+    @listen(pull_cv)
+    def cv_review(self):
         result = (
-            ContentCrew()
+            HrCrew()
             .crew()
-            .kickoff(inputs={"topic": self.state.topic})
+            .kickoff(inputs={"cv": self.state.cv})
         )
 
-        print("Content generated")
-        self.state.final_post = result.raw
+        # Combine all tasks from this specific crew execution
+        full_text = ""
+        for task_out in result.tasks_output:
+            full_text += f"### Task: {task_out.name}\n{task_out.raw}\n\n"
+                                    #{task_out.description}\n
+        
+        self.state.debate = full_text
 
-    @listen(generate_content)
+
+    @listen(cv_review)
     def save_content(self):
         print("Saving content")
         output_dir = Path("output")
         output_dir.mkdir(exist_ok=True)
-        with open(output_dir / "post.md", "w") as f:
-            f.write(self.state.final_post)
-        print("Post saved to output/post.md")
+        with open(output_dir / "debate.md", "w") as f:
+            f.write(self.state.debate)
+        print("Debate saved to output/debate.md")
 
 
 def kickoff():
-    content_flow = ContentFlow()
-    content_flow.kickoff()
+    hr_flow = HrFlow()
+    hr_flow.kickoff()
 
 
 def plot():
-    content_flow = ContentFlow()
-    content_flow.plot()
+    hr_flow = HrFlow()
+    hr_flow.plot()
 
 
 def run_with_trigger():
@@ -79,10 +89,10 @@ def run_with_trigger():
 
     # Create flow and kickoff with trigger payload
     # The @start() methods will automatically receive crewai_trigger_payload parameter
-    content_flow = ContentFlow()
+    hr_flow = HrFlow()
 
     try:
-        result = content_flow.kickoff({"crewai_trigger_payload": trigger_payload})
+        result = hr_flow.kickoff({"crewai_trigger_payload": trigger_payload})
         return result
     except Exception as e:
         raise Exception(f"An error occurred while running the flow with trigger: {e}")
