@@ -1,4 +1,4 @@
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 # If you want to run a snippet of code before or after the crew starts,
@@ -11,6 +11,7 @@ class HrCrew():
 
     agents: list[BaseAgent]
     tasks: list[Task]
+    llm: LLM = LLM(model="gemma4:31b", temperature=0.3)
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -22,6 +23,7 @@ class HrCrew():
     def hr_specialist1(self) -> Agent:
         return Agent(
             config=self.agents_config['hr_specialist1'], # type: ignore[index]
+            llm=self.llm,
             verbose=True
         )
 
@@ -29,6 +31,7 @@ class HrCrew():
     def hr_specialist2(self) -> Agent:
         return Agent(
             config=self.agents_config['hr_specialist2'], # type: ignore[index]
+            llm=self.llm,
             verbose=True
         )
 
