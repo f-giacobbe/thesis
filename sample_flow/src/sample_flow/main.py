@@ -19,7 +19,7 @@ def get_cv_text(filepath):
 
 
 class HrState(BaseModel):
-    cv_file: str = f"{Path("input")}/cv.pdf"
+    cv_file: str = f"{Path('input')}/cv.pdf"
     cv: str = ""
     debate: str = ""
 
