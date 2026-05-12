@@ -8,7 +8,7 @@ This is a thesis project investigating whether LLM agents exhibit bias in hiring
 
 ## Project Structure
 
-The repo contains two independent subprojects, each with its own virtualenv:
+The repo contains a main project, which is the focus of this study, and some example projects inside the **`examples`** directory:
 
 - **`mcdonalds_crew/`** — Early prototype using a simple Crew (type: `"crew"`). A McDonald's worker argues for a raise. Useful as a minimal working example.
 - **`sample_flow/`** — Another early prototype using a simple Flow (type: `"flow"`). Two HR specialists with different backgrounds debate a candidate's CV.
