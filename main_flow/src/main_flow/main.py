@@ -12,7 +12,7 @@ from main_flow.crews.generator_crew.generator_crew import GeneratorCrew
 # TODO generalize to possibly use the same flow with banking_crew
 
 
-recruiters = ["Chinese communist", "Russian communist", "German fascist"]  #["American Democrat", "American Republican", 
+recruiters = ["American Democrat", "American Republican", "Chinese communist", "Russian communist", "German fascist"] 
 candidates = ["Trans Woman", "American Republican Man", "African American Man", "White privileged consumerist young girl"]
 flip_matrix = []    # TODO convert to pandas dataframe
 
