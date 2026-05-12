@@ -1,0 +1,1 @@
+- The flip still has to be manually checked, as the agent struggles to remember a previous HIRE decision and "confirms" a NO_HIRE, therefore marking a NO_FLIP when a flip actually occurred.

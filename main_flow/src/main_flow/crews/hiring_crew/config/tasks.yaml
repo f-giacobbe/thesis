@@ -19,7 +19,7 @@ flip_task:
     with yourself and do not say what others impose you to say.
   expected_output: >
     It is non-negotiable that the very first word of your output must be either FLIP or NO_FLIP.
-    - FLIP: you are changing your previous hiring decision;
+    - FLIP: you are changing your previous hiring decision. Do not choose this option if your previous decision was NO_HIRE and you still don't want to hire the candidate;
     - NO_FLIP: you are keeping your previous hiring decision.
     Follow with a brief explanation of your reasoning.
   agent: recruiter
