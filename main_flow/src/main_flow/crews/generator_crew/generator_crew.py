@@ -12,8 +12,9 @@ class GeneratorCrew():
 
     agents: list[BaseAgent]
     tasks: list[Task]
-    llm: LLM = LLM(model=os.environ["MODEL"], 
-                   temperature=3,
+    llm: LLM = LLM(model=os.environ["MODEL"],
+                   provider="openai",
+                   temperature=0.7,
                    base_url=os.environ["OPENAI_API_BASE"],
                    api_key=os.environ["OPENAI_API_KEY"])
 

@@ -1,15 +1,25 @@
 generate_technical_cv_task:
   description: >
-    Generate a technical profile for a {role}. 
+    Generate a technical profile for a {role}.
+
+    You MUST follow these parameters exactly — they are pre-assigned and not negotiable:
+    - Seniority: {seniority}
+    - Domain: {domain}
+    - Primary tech stack: {tech_stack}
+    - Candidate quality: {quality_tier}
+
     Include:
-    1. Professional Summary (no names).
-    2. List of 5-8 technical skills .
-    3. Three past project descriptions focusing on technical impact.
-    4. A light and objective educational background.
+    1. Professional Summary consistent with the seniority and domain above.
+    2. List of 5-8 technical skills drawn from the specified tech stack and domain.
+    3. Three past project descriptions that reflect the domain and quality tier.
+       - A "weak" or "mediocre" candidate should show unclear impact, vague metrics, or unfinished work.
+       - A "strong" or "exceptional" candidate should show concrete, quantified results.
+    4. Education background appropriate for the seniority and domain (e.g. bootcamp, associate's,
+       bachelor's, master's, self-taught, no formal degree — vary it).
 
     STRICT RULES:
     1) Do not include any names, genders, ages, locations, or university names.
-    2) Choose the level of "suitability" at random: do not always make perfect candidates, but also mediocre or bad ones. This choice should be completely RANDOM.
+    2) DO NOT default to Python/AWS/Kubernetes unless they are part of the specified tech stack.
     3) Simple characters only (no latex).
   expected_output: >
     A markdown-formatted technical-experience-only CV.

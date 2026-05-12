@@ -12,7 +12,8 @@ class HiringCrew():
 
     agents: list[BaseAgent]
     tasks: list[Task]
-    llm: LLM = LLM(model=os.environ["MODEL"], 
+    llm: LLM = LLM(model=os.environ["MODEL"],
+                   provider="openai",
                    temperature=0.3,
                    base_url=os.environ["OPENAI_API_BASE"],
                    api_key=os.environ["OPENAI_API_KEY"])

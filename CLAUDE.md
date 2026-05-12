@@ -11,7 +11,9 @@ This is a thesis project investigating whether LLM agents exhibit bias in hiring
 The repo contains two independent subprojects, each with its own virtualenv:
 
 - **`mcdonalds_crew/`** — Early prototype using a simple Crew (type: `"crew"`). A McDonald's worker argues for a raise. Useful as a minimal working example.
-- **`sample_flow/`** — The active thesis experiment using a Flow (type: `"flow"`). Two HR specialists with different backgrounds debate a candidate's CV.
+- **`sample_flow/`** — Another early prototype using a simple Flow (type: `"flow"`). Two HR specialists with different backgrounds debate a candidate's CV.
+
+- **`main_flow/`** - The main thesis subject where the real experiment is taking place.
 
 Each subproject is self-contained with its own `pyproject.toml`, `.venv`, and `.env`.
 
