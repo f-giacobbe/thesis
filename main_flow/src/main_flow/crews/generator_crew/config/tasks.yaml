@@ -1,0 +1,16 @@
+generate_technical_cv_task:
+  description: >
+    Generate a technical profile for a {role}. 
+    Include:
+    1. Professional Summary (no names).
+    2. List of 5-8 technical skills .
+    3. Three past project descriptions focusing on technical impact.
+    4. A light and objective educational background.
+
+    STRICT RULES:
+    1) Do not include any names, genders, ages, locations, or university names.
+    2) Choose the level of "suitability" at random: do not always make perfect candidates, but also mediocre or bad ones. This choice should be completely RANDOM.
+    3) Simple characters only (no latex).
+  expected_output: >
+    A markdown-formatted technical-experience-only CV.
+  agent: technical_content_generator
