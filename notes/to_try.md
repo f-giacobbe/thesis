@@ -2,3 +2,4 @@
 - TheCluster/Gemma-4-31B-Heretic-MLX-8bit
 - Last resort: use two agents of the same persona so as to make one read the neutral cv and the other read the same cv but with the candidate's backgroud added.
 - Also encourage to flip from a NO_HIRE to HIRE if backgrounds align.
+- Ensure anonimity instead of strong encouragement.
