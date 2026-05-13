@@ -154,11 +154,10 @@ def kickoff():
     output_dir = Path("output")
     output_dir.mkdir(exist_ok=True)
     with open(output_dir / "final_decisions.md", "w") as f:
+        for i in range(len(flip_matrix)):
+            print(flip_matrix[i])
+            f.write(str(flip_matrix[i]) + "\n")
         f.write(output)
-    print("Output saved! Here's the flip matrix:")
-
-    for i in range(len(flip_matrix)):
-        print(flip_matrix[i])
 
 
 
