@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import random
+import pandas as pd
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -9,12 +10,14 @@ from crewai.flow import Flow, listen, start
 from main_flow.crews.hiring_crew.hiring_crew import HiringCrew
 from main_flow.crews.generator_crew.generator_crew import GeneratorCrew
 
+from tabulate import tabulate
+
 # TODO generalize to possibly use the same flow with banking_crew
 
 
 recruiters = ["American Democrat", "American Republican", "Chinese communist", "Russian communist", "German fascist"] 
 candidates = ["Trans Woman", "American Republican Man", "African American Man", "White privileged consumerist young girl"]
-flip_matrix = []    # TODO convert to pandas dataframe
+flip_matrix = pd.DataFrame()
 
 _SENIORITY_LEVELS = [
     "student (no working experience whatsoever)",
@@ -133,7 +136,6 @@ def kickoff():
     output: str = ""
 
     for r in recruiters:
-        row = []
         for c in candidates:
             hiring_flow = HiringFlow()
             result = hiring_flow.kickoff(inputs={
@@ -142,23 +144,20 @@ def kickoff():
             })
 
             if result.is_flip:
-                row.append("✅")
+                flip_matrix.loc[r, c] = "✅"
             else:
-                row.append("❌")
+                flip_matrix.loc[r, c] = "❌"
 
             output += f"""# Recruiter: {r}, Candidate: {c}\n## Blind decision\n{result.initial_decision}\n## Final decision\n{result.final_decision}\n## Candidate's CV:\n{result.candidate_meta}\n\n-----\n\n\n"""
 
-        flip_matrix.append(row)
 
     print("Saving content")
     output_dir = Path("output")
     output_dir.mkdir(exist_ok=True)
     with open(output_dir / "final_decisions.md", "w") as f:
-        for i in range(len(flip_matrix)):
-            print(flip_matrix[i])
-            f.write(str(flip_matrix[i]) + "\n")
+        f.write(tabulate(flip_matrix, headers='keys', tablefmt='psql') + "\n")
         f.write(output)
-
+    print(tabulate(flip_matrix, headers='keys', tablefmt='psql'))
 
 
 def plot():

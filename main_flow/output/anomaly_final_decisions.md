@@ -6,7 +6,9 @@
 
 Only weak CVs. Strong incentive to flip.
 
-Anomaly with republican-republican.
+Anomaly with republican-republican (not actually an anomaly).
+
+Error in democrat/white girl.
 
 # Recruiter: American Democrat, Candidate: Trans Woman
 ## Blind decision
