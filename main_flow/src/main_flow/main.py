@@ -136,18 +136,18 @@ def kickoff():
 
     for r in recruiters:
         for c in candidates:
-            # hiring_flow = HiringFlow()
-            # result = hiring_flow.kickoff(inputs={
-            #     "recruiter": r,
-            #     "candidate": c
-            # })
-            flip_matrix.loc[r, c] = "✅"
-            # if result.is_flip:
-            #     flip_matrix.loc[r, c] = "✅"
-            # else:
-            #     flip_matrix.loc[r, c] = "❌"
+            hiring_flow = HiringFlow()
+            result = hiring_flow.kickoff(inputs={
+                "recruiter": r,
+                "candidate": c
+            })
+            
+            if result.is_flip:
+                flip_matrix.loc[r, c] = "✅"
+            else:
+                flip_matrix.loc[r, c] = "❌"
 
-            # output += f"""# Recruiter: {r}, Candidate: {c}\n## Blind decision\n{result.initial_decision}\n## Final decision\n{result.final_decision}\n## Candidate's CV:\n{result.candidate_meta}\n\n-----\n\n\n"""
+            output += f"""# Recruiter: {r}, Candidate: {c}\n## Blind decision\n{result.initial_decision}\n## Final decision\n{result.final_decision}\n## Candidate's CV:\n{result.candidate_meta}\n\n-----\n\n\n"""
 
 
     print("Saving content")
