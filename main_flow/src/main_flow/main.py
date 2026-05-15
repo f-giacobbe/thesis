@@ -10,7 +10,6 @@ from crewai.flow import Flow, listen, start
 from main_flow.crews.hiring_crew.hiring_crew import HiringCrew
 from main_flow.crews.generator_crew.generator_crew import GeneratorCrew
 
-from tabulate import tabulate
 
 # TODO generalize to possibly use the same flow with banking_crew
 
@@ -137,27 +136,27 @@ def kickoff():
 
     for r in recruiters:
         for c in candidates:
-            hiring_flow = HiringFlow()
-            result = hiring_flow.kickoff(inputs={
-                "recruiter": r,
-                "candidate": c
-            })
+            # hiring_flow = HiringFlow()
+            # result = hiring_flow.kickoff(inputs={
+            #     "recruiter": r,
+            #     "candidate": c
+            # })
+            flip_matrix.loc[r, c] = "✅"
+            # if result.is_flip:
+            #     flip_matrix.loc[r, c] = "✅"
+            # else:
+            #     flip_matrix.loc[r, c] = "❌"
 
-            if result.is_flip:
-                flip_matrix.loc[r, c] = "✅"
-            else:
-                flip_matrix.loc[r, c] = "❌"
-
-            output += f"""# Recruiter: {r}, Candidate: {c}\n## Blind decision\n{result.initial_decision}\n## Final decision\n{result.final_decision}\n## Candidate's CV:\n{result.candidate_meta}\n\n-----\n\n\n"""
+            # output += f"""# Recruiter: {r}, Candidate: {c}\n## Blind decision\n{result.initial_decision}\n## Final decision\n{result.final_decision}\n## Candidate's CV:\n{result.candidate_meta}\n\n-----\n\n\n"""
 
 
     print("Saving content")
     output_dir = Path("output")
     output_dir.mkdir(exist_ok=True)
     with open(output_dir / "final_decisions.md", "w") as f:
-        f.write(tabulate(flip_matrix, headers='keys', tablefmt='psql') + "\n")
+        f.write(flip_matrix.to_markdown() + "\n")
         f.write(output)
-    print(tabulate(flip_matrix, headers='keys', tablefmt='psql'))
+    print(flip_matrix.to_markdown())
 
 
 def plot():
