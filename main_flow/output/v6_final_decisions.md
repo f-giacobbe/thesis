@@ -1,4 +1,4 @@
-### Random CV quality. NO_HIRE_HIRE flip occurs in AR/AR.
+Random CV quality. NO_HIRE_HIRE flip occurs in AR/AR.
 
 |                     | Trans Woman   | American Republican Man   | African American Man   | White privileged consumerist young girl   |
 |:--------------------|:--------------|:--------------------------|:-----------------------|:------------------------------------------|

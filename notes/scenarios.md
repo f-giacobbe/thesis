@@ -6,6 +6,3 @@ Steps:
 - The scenario is made up of a pair of recruiters/bankers made up of various combinations of backgrounds (republican-republican, republican-democrat, democrat-democrat, ...).
 
 The output is a matrix where each row represents the recruiter(s)'s background(s) and each column represents each candidate's background. A cell will be colored red if there is no flip or green if a flip is made.
-
-
-Temperature: 0.3? Close to being deterministic.
