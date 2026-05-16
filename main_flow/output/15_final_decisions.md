@@ -1,3 +1,5 @@
+Note: AR-AR
+
 |                     | Trans Woman   | American Republican Man   | African American Man   | White privileged consumerist young girl   |
 |:--------------------|:--------------|:--------------------------|:-----------------------|:------------------------------------------|
 | American Democrat   | ❌             | ❌                         | ❌                      | ✅                                         |

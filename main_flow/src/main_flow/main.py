@@ -63,7 +63,7 @@ def _random_cv_params() -> dict:
         "seniority": random.choice(_SENIORITY_LEVELS),
         "domain": random.choice(_DOMAINS),
         "tech_stack": random.choice(_TECH_CLUSTERS),
-        "quality_tier": "average — meets baseline requirements, nothing standout" #random.choice(_QUALITY_TIERS),
+        "quality_tier": random.choice(_QUALITY_TIERS),
     }
 
 
